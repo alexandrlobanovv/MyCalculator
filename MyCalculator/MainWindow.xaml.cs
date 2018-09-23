@@ -24,5 +24,46 @@ namespace MyCalculator
         {
             InitializeComponent();
         }
+
+        private void bt_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = sender as Button;
+            WriteToTextBox(bt.Content.ToString());
+        }
+
+        private void WriteToTextBox(string value)
+        {
+            switch (value)
+            {
+                case "+":
+                    break;
+                case "-":
+                    break;
+                case "/":
+                    break;
+                case "x":
+                    break;
+                case "%":
+                    break;
+                case ".":
+                    tb_Output.AppendText(value);
+                    break;
+                case "AC":
+                    tb_Output.Clear();
+                    break;
+                case "+/-":
+                    break;
+                case "=":
+                    break;
+                default:
+                    if (Char.IsDigit(value[0]))
+                    {
+                        tb_Output.AppendText(value);
+                    }
+                    break;
+            }
+            if (tb_Output.Text.Length > 20)
+                tb_Output.Text = tb_Output.Text.Remove(20);
+        }
     }
 }
