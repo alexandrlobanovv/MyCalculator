@@ -1,0 +1,178 @@
+﻿<Window x:Class="MyCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCalculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="330" Width="220" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <!--Стиль кнопок-->
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Margin" Value="5,3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="16" BorderBrush="Black" BorderThickness="2">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" 
+                                                        ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#00000000"/>
+                                        <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Bold">
+                                </ContentPresenter>
+                            </Border>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="InputDesign" TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="MinWidth" Value="175"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Color="#00000000" Offset="1"/>
+                                        <GradientStop Color="#AA101030" Offset="0.3"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <TextBox HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         TextElement.FontWeight="Bold"
+                                         MinWidth="160"
+                                         MinHeight="18" BorderThickness="0"
+                                         Background="Transparent">
+                                </TextBox>
+                                
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Focusable" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--Текст бокс-->
+        <TextBox Grid.Row="0" Style="{DynamicResource InputDesign}"></TextBox>
+        <!-- Блоки кнопок -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="bt_AC" Style="{DynamicResource RoundCorner}" Content="AC" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_PlusMinus" Style="{DynamicResource RoundCorner}" Content="+/-" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Percent" Style="{DynamicResource RoundCorner}" Content="%" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Div" Style="{DynamicResource RoundCorner}" Content="/" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="bt_7" Style="{DynamicResource RoundCorner}" Content="7" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_8" Style="{DynamicResource RoundCorner}" Content="8" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_9" Style="{DynamicResource RoundCorner}" Content="9" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Mult" Style="{DynamicResource RoundCorner}" Content="x" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="bt_4" Style="{DynamicResource RoundCorner}" Content="4" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_5" Style="{DynamicResource RoundCorner}" Content="5" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_6" Style="{DynamicResource RoundCorner}" Content="6" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Minus" Style="{DynamicResource RoundCorner}" Content="-" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="bt_1" Style="{DynamicResource RoundCorner}" Content="1" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_2" Style="{DynamicResource RoundCorner}" Content="2" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_3" Style="{DynamicResource RoundCorner}" Content="3" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Plus" Style="{DynamicResource RoundCorner}" Content="+" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="bt_0" Style="{DynamicResource RoundCorner}" Content="0" HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Point" Style="{DynamicResource RoundCorner}" Content="." HorizontalAlignment="Stretch" Width="36" Height="36"></Button>
+            <Button x:Name="bt_Rezult" Style="{DynamicResource RoundCorner}" Content="=" HorizontalAlignment="Stretch" Width="82" Height="36"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
